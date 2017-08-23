@@ -19,6 +19,13 @@ module Cldr
             result[territory] = node.content
             result
           end
+          self[:mapzones] = doc.xpath('//mapTimezones/mapZone').map do |node|
+            {
+              type: node.attr('type'),
+              territory: node.attr('territory'),
+              other: node.attr('other')
+            }
+          end
         end
 
         protected
