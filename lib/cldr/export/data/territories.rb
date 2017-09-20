@@ -9,7 +9,20 @@ module Cldr
 
         def territories
           @territories ||= select('localeDisplayNames/territories/territory').inject({}) do |result, node|
-            result[node.attribute('type').value.to_sym] = node.content unless draft?(node)
+            unless draft?(node)
+              entry = { value: node.content }
+
+              if alt = node.attr('alt')
+                entry[:alt] = alt.value
+              end
+
+              if draft = node.attr('draft')
+                entry[:draft] = draft.value
+              end
+
+              (result[node.attribute('type').value.to_sym] ||= []) << entry
+            end
+
             result
           end
         end
