@@ -18,7 +18,8 @@ module Cldr
           @formats ||= select('dates/timeZoneNames/*').inject({}) do |result, format|
             if format.name.end_with?('Format')
               underscored_name = format.name.gsub(/([a-z])([A-Z])/, '\1_\2').downcase
-              result[underscored_name] = format.text
+              type = format.attr('type') || 'generic'
+              (result[underscored_name] ||= {})[type] = format.text
             end
 
             result
