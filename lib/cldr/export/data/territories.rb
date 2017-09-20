@@ -12,11 +12,11 @@ module Cldr
             unless draft?(node)
               entry = { value: node.content }
 
-              if alt = node.attr('alt')
+              if alt = node.attribute('alt')
                 entry[:alt] = alt.value
               end
 
-              if draft = node.attr('draft')
+              if draft = node.attribute('draft')
                 entry[:draft] = draft.value
               end
 
