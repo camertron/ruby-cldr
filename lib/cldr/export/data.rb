@@ -27,6 +27,7 @@ module Cldr
       autoload :SegmentsRoot,              'cldr/export/data/segments_root'
       autoload :Territories,               'cldr/export/data/territories'
       autoload :TerritoriesContainment,    'cldr/export/data/territories_containment'
+      autoload :TimezoneAliases,           'cldr/export/data/timezone_aliases'
       autoload :Timezones,                 'cldr/export/data/timezones'
       autoload :Units,                     'cldr/export/data/units'
       autoload :Variables,                 'cldr/export/data/variables'

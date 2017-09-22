@@ -25,6 +25,7 @@ module Cldr
       Variables
       Aliases
       RegionCurrencies
+      TimezoneAliases
     ]
 
     class << self

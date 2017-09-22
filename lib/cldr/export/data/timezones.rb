@@ -1,5 +1,3 @@
-# I probably don't really get timezones.
-
 module Cldr
   module Export
     module Data
