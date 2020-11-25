@@ -1,4 +1,5 @@
 require 'i18n'
+require 'fileutils'
 require 'i18n/locale/tag'
 require 'core_ext/string/camelize'
 require 'core_ext/string/underscore'
@@ -13,6 +14,7 @@ module Cldr
     autoload :Yaml, 'cldr/export/yaml'
 
     SHARED_COMPONENTS = %w[
+      CountryCodes
       CurrencyDigitsAndRounding
       Metazones
       NumberingSystems
@@ -144,12 +146,12 @@ module Cldr
             end
           end
 
-          ancestry
+          ancestry 
         else
           [locale]
         end
 
-        locales << :root if component_should_merge_root?(component)
+        locales << :root if should_merge_root?(locale, component, options)
         locales
       end
 
@@ -170,8 +172,10 @@ module Cldr
         SHARED_COMPONENTS.include?(component)
       end
 
-      def component_should_merge_root?(component)
-        !%w(Rbnf Fields).include?(component)
+      def should_merge_root?(locale, component, options)
+        return false if %w(Rbnf Fields).include?(component)
+        return true if options[:merge]
+        locale == :en
       end
     end
   end

@@ -7,6 +7,7 @@ module Cldr
       autoload :Base,                      'cldr/export/data/base'
       autoload :Calendars,                 'cldr/export/data/calendars'
       autoload :Characters,                'cldr/export/data/characters'
+      autoload :CountryCodes,              'cldr/export/data/country_codes'
       autoload :Currencies,                'cldr/export/data/currencies'
       autoload :CurrencyDigitsAndRounding, 'cldr/export/data/currency_digits_and_rounding'
       autoload :Delimiters,                'cldr/export/data/delimiters'
@@ -25,6 +26,7 @@ module Cldr
       autoload :RbnfRoot,                  'cldr/export/data/rbnf_root'
       autoload :RegionCurrencies,          'cldr/export/data/region_currencies'
       autoload :SegmentsRoot,              'cldr/export/data/segments_root'
+      autoload :Subdivisions,              'cldr/export/data/subdivisions'
       autoload :Territories,               'cldr/export/data/territories'
       autoload :TerritoriesContainment,    'cldr/export/data/territories_containment'
       autoload :TimezoneAliases,           'cldr/export/data/timezone_aliases'
@@ -48,7 +50,7 @@ module Cldr
         end
 
         def components
-          self.constants.sort - [:Base, :Export]
+          self.constants.sort - [:Base, :Export, :ParentLocales]
         end
       end
     end

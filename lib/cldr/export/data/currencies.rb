@@ -17,13 +17,23 @@ module Cldr
 
         def currency(node)
           data = select(node, 'displayName').inject({}) do |result, node|
-            count = node.attribute('count') ? node.attribute('count').value.to_sym : :one
-            result[count] = node.content unless draft?(node)
+            unless draft?(node)
+              if node.attribute('count')
+                count = node.attribute('count').value.to_sym
+                result[count] = node.content
+              else
+                result[:one] = node.content if result[:one].nil?
+                result[:name] = node.content
+              end
+            end
+
             result
           end
 
           symbol = select(node, 'symbol')
+          narrow_symbol = symbol.select { |child_node| child_node.values.include?('narrow') }.first
           data[:symbol] = symbol.first.content if symbol.length > 0
+          data[:'narrow_symbol'] = narrow_symbol.content unless narrow_symbol.nil?
 
           data
         end
